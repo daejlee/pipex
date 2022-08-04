@@ -1,5 +1,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
+# include <unistd.h>
+
 void	free_arr(void **com);
 int		err();
 void	swap_pfd(int **pfd1, int **pfd2);

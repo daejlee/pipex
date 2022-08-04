@@ -1,13 +1,10 @@
-#include "./libft/ft_printf.h" //헤더가 없으면 gnl리턴이 안되더라..
+#include "./libft/libft.h"
 #include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/wait.h>
 #include "./pipex.h"
-// cc -g -o pipex pipex.c -lft -L./libft
-// ./pipex infile
+// cc -g -o pipex pipex_utils.c pipex.c -lft -L./libft
 //$> ./pipex infile "grep new" "wc -w" outfile
 //< infile grep new | wc -w > outfile
+//valgrind --leak-check=full --trace-children=yes ./pipex infile "grep new" "wc -w" outfile
 
 char	*get_sh_func(char **com)
 {
@@ -21,22 +18,23 @@ char	*get_sh_func(char **com)
 	return (sh_func);
 }
 
-void	*exec_com(char **com, unsigned int i, int input_fd, int output_fd, int closing_fd)
+int	exec_com(char **com, int input_fd, int output_fd, int closing_fd)
 {
 	pid_t	pid;
-	pid_t	child_pid;
-	int		status;
 	char	*sh_func;
 
 	if (!com)
-		return (NULL);
+		return (1);
 	pid = fork();
 	if (pid == -1)
-		return (NULL);
+	{
+		free_arr((void **)com);
+		return (1);
+	}
 	else if (!pid)  //child
 	{
 		close(closing_fd);
-		close(2);
+		dup2(output_fd, 2);
 		if (input_fd)
 		{
 			dup2(input_fd, 0);
@@ -52,23 +50,22 @@ void	*exec_com(char **com, unsigned int i, int input_fd, int output_fd, int clos
 			exit(1);
 		execve((const char *)sh_func, (char * const*)com, NULL);
 	}
-	else // parents
+	else
 	{
-		//close(closing_fd);
-		//wait(&status);
 	}
 	free_arr((void **)com);
+	return (0);
 }
 
 int	main(int argc, char* argv[])
 {
-	int				outfile_fd;
-	int				infile_fd;
-	int				pfd_arr[2][2];
-	int				*pfd;
-	int				*next_pfd;
-	char			**com;
-	unsigned int	i;
+	int		outfile_fd;
+	int		infile_fd;
+	int		pfd_arr[2][2];
+	int		*pfd;
+	int		*next_pfd;
+	char	**com;
+	int		i;
 
 	infile_fd = open(argv[1], O_RDONLY);
 	outfile_fd = open(argv[argc - 1], O_WRONLY);
@@ -80,7 +77,8 @@ int	main(int argc, char* argv[])
 		return(err());
 	i = 2;
 	com = ft_split(argv[i++], ' ');
-	exec_com(com, i, infile_fd, pfd[1], 0);
+	if (exec_com(com, infile_fd, pfd[1], 0))
+		return(err());
 	close(infile_fd);
 	while (i < argc - 1)
 	{
@@ -89,11 +87,10 @@ int	main(int argc, char* argv[])
 		com = ft_split(argv[i++], ' ');
 		if (i == argc - 1)
 			dup2(outfile_fd, next_pfd[1]);
-		exec_com(com, i, pfd[0], next_pfd[1], pfd[1]);
+		if (exec_com(com, pfd[0], next_pfd[1], pfd[1]))
+			return(err());
 		close_fd(pfd);
 		swap_pfd(&pfd, &next_pfd);
 	}
-	close(outfile_fd);
-	close_fd(next_pfd);
 	return (0);
 }
