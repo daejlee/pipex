@@ -14,7 +14,7 @@ void	free_arr(void **com)
 
 int		err()
 {
-	perror("ERROR!");
+	perror("pipex error");
 	return (1);
 }
 

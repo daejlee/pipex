@@ -45,9 +45,9 @@ int	exec_com(char **com, int input_fd, int output_fd, int closing_fd, char **env
 	int		status;
 	char	*sh_func;
 
-	close(closing_fd);
 	if (!com)
 		return (1);
+	close(closing_fd);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -65,9 +65,9 @@ int	exec_com(char **com, int input_fd, int output_fd, int closing_fd, char **env
 	else
 	{
 		free_arr((void **)com);
-		wait(&status);
-		//ft_printf("child pid : %i / status : %d\n", pid, status);
-		return (status);
+		waitpid(pid, &status, 1);
+		ft_printf("child pid : %i / status : %d\n", pid, status);
+		return (0);
 	}
 	return (0);
 }
@@ -95,7 +95,7 @@ int	main(int argc, char* argv[], char** envp)
 	}
 	i = 2;
 	com = ft_split(argv[i++], ' ');
-	if (exec_com(com, infile_fd, pfd[1], 0, envp))
+	if (exec_com(com, infile_fd, pfd[1]/*outfile_fd*/, 0, envp))
 		return(err());
 	close(infile_fd);
 	while (i < argc - 1)
