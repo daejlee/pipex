@@ -2,7 +2,7 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include "./pipex.h"
-// cc -g -o pipex pipex_utils.c pipex.c -lft -L./libft
+// cc -g -Wall -Wextra -Werror -o pipex pipex_utils.c pipex.c -lft -L./libft
 //$> ./pipex infile "grep new" "wc -w" outfile
 //< infile grep new | wc -w > outfile
 //valgrind --leak-check=full --trace-children=yes ./pipex infile "grep new" "wc -w" outfile
@@ -60,15 +60,19 @@ int	exec_com(char **com, int input_fd, int output_fd, int closing_fd, char **env
 		prep_fd(input_fd, output_fd);
 		sh_func = get_sh_func(com);
 		if (!sh_func || access((const char *)sh_func, F_OK))
+		{
+			if (sh_func)
+				free(sh_func);
 			exit(1);
+		}
 		else
 			execve((const char *)sh_func, (char * const*)com, envp);
 	}
 	else
 	{
 		free_arr(com);
-		wait(&status);
-		ft_printf("child pid: %i / status: %d / wstatus: %d\n", pid, status, WIFEXITED(status));
+		waitpid(-1, &status, WNOHANG);
+		ft_printf("child pid: %i / status: %d\n", pid, status);
 		return (0);
 	}
 	return (0);
@@ -97,10 +101,9 @@ int	main(int argc, char* argv[], char** envp)
 	}
 	i = 2;
 	com = ft_split(argv[i++], ' ');
-	if (exec_com(com, infile_fd, pfd[1]/*outfile_fd*/, 0, envp))
+	if (exec_com(com, infile_fd, pfd[1], 0, envp))
 		return(err());
 	close(infile_fd);
-	//존재하지 않는 명령어 실행 후 파이프 연결의 경우 일치하지 않음
 	while (i < argc - 1)
 	{
 		if (pipe(next_pfd) == -1)
