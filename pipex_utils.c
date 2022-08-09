@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	free_arr(void **com)
+void	free_arr(char **com)
 {
 	unsigned int	i;
 

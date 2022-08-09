@@ -6,6 +6,7 @@
 //$> ./pipex infile "grep new" "wc -w" outfile
 //< infile grep new | wc -w > outfile
 //valgrind --leak-check=full --trace-children=yes ./pipex infile "grep new" "wc -w" outfile
+//./pipex "assets/deepthought.txt" "notexisting" "wc" "test_output.txt"
 
 char	*get_sh_func(char **com)
 {
@@ -51,22 +52,23 @@ int	exec_com(char **com, int input_fd, int output_fd, int closing_fd, char **env
 	pid = fork();
 	if (pid == -1)
 	{
-		free_arr((void **)com);
+		free_arr(com);
 		return (1);
 	}
 	else if (!pid)  //child
 	{
 		prep_fd(input_fd, output_fd);
 		sh_func = get_sh_func(com);
-		if (!sh_func)
+		if (!sh_func || access((const char *)sh_func, F_OK))
 			exit(1);
-		execve((const char *)sh_func, (char * const*)com, envp);
+		else
+			execve((const char *)sh_func, (char * const*)com, envp);
 	}
 	else
 	{
-		free_arr((void **)com);
-		waitpid(pid, &status, 1);
-		ft_printf("child pid : %i / status : %d\n", pid, status);
+		free_arr(com);
+		wait(&status);
+		ft_printf("child pid: %i / status: %d / wstatus: %d\n", pid, status, WIFEXITED(status));
 		return (0);
 	}
 	return (0);
@@ -98,6 +100,7 @@ int	main(int argc, char* argv[], char** envp)
 	if (exec_com(com, infile_fd, pfd[1]/*outfile_fd*/, 0, envp))
 		return(err());
 	close(infile_fd);
+	//존재하지 않는 명령어 실행 후 파이프 연결의 경우 일치하지 않음
 	while (i < argc - 1)
 	{
 		if (pipe(next_pfd) == -1)
