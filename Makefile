@@ -2,10 +2,10 @@
 NAME = pipex
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
-SRC = pipex_utils.c pipex.c
-OBJ = pipex_utils.o pipex.o
-BONUS_SRC = ./bonus/pipex_utils_bonus.c ./bonus/pipex_bonus.c
-BONUS_OBJ = ./bonus/pipex_utils_bonus.o ./bonus/pipex_bonus.o
+SRC = pipex_utils_1.c pipex_utils_2.c pipex.c
+OBJ = pipex_utils_1.o pipex_utils_2.o pipex.o
+BONUS_SRC = pipex_utils_1_bonus.c pipex_utils_2_bonus.c pipex_bonus.c
+BONUS_OBJ = pipex_utils_1_bonus.o pipex_utils_2_bonus.o pipex_bonus.o
 LIBFT = ./libft/libft.a
 LIBFT_DIR = ./libft
 
@@ -38,5 +38,5 @@ re :
 	$(MAKE) fclean
 	$(MAKE) all
 
-#bonus : $(NAME) $(BONUS_SRC)
-#	make WITH_BONUS=1 $(NAME)
+bonus : $(NAME) $(BONUS_SRC)
+	make WITH_BONUS=1 $(NAME)

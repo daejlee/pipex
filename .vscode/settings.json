@@ -4,6 +4,9 @@
 		"unistd.h": "c",
 		"ft_printf.h": "c",
 		"pipex.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"stdlib.h": "c",
+		"pipex_bonus.h": "c",
+		"cstdio": "c"
 	}
 }
