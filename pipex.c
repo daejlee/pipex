@@ -14,12 +14,6 @@
 #include "./pipex.h"
 #include <fcntl.h>
 #include <sys/wait.h>
-// cc -g -Wall -Wextra -Werror -o pipex pipex_utils.c pipex.c -lft -L./libft
-//$> ./pipex infile "grep new" "wc -w" outfile
-//< infile grep new | wc -w > outfile
-//valgrind --leak-check=full --trace-children=yes ./pipex infile "grep new" "wc -w" outfile
-//./pipex "assets/deepthought.txt" "notexisting" "wc" "test_output.txt"
-//./pipex "/dev/null" "./assets/env_var" "cat" "test_output.txt"
 
 static char	**get_sh_path(char **envp)
 {
@@ -98,8 +92,7 @@ static int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
 	}
 	else
 		waitpid(-1, &status, WNOHANG);
-	free_arr(p.com);
-	return (0);
+	return (free_arr(p.com));
 }
 
 static int	execute(t_fd_list p, int argc, char *argv[])

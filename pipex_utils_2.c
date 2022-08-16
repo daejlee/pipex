@@ -13,7 +13,7 @@
 #include "./libft/libft.h"
 #include <stdio.h>
 
-void	free_arr(char **com)
+int	free_arr(char **com)
 {
 	unsigned int	i;
 
@@ -21,6 +21,7 @@ void	free_arr(char **com)
 	while (com[i])
 		free(com[i++]);
 	free(com);
+	return (0);
 }
 
 int	err(void)

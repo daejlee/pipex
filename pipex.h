@@ -25,7 +25,7 @@ typedef struct fd_list
 	char	**com;
 }	t_fd_list;
 
-void	free_arr(char **com);
+int		free_arr(char **com);
 int		err(void);
 void	swap_pfd(int **pfd1, int **pfd2);
 void	close_fd(int fd[2]);
