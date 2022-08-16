@@ -21,7 +21,7 @@
 //./pipex "assets/deepthought.txt" "notexisting" "wc" "test_output.txt"
 //./pipex "/dev/null" "./assets/env_var" "cat" "test_output.txt"
 
-char	**get_sh_path(char **envp)
+static char	**get_sh_path(char **envp)
 {
 	unsigned int	i;
 	char			**sh_paths;
@@ -44,7 +44,7 @@ char	**get_sh_path(char **envp)
 	return (NULL);
 }
 
-char	*get_sh_func(char **com, char **envp)
+static char	*get_sh_func(char **com, char **envp)
 {
 	char			*sh_func;
 	char			**sh_paths;
@@ -72,7 +72,7 @@ char	*get_sh_func(char **com, char **envp)
 	return (NULL);
 }
 
-int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
+static int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
 {
 	pid_t	pid;
 	int		status;
@@ -87,12 +87,14 @@ int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
 	}
 	else if (!pid)
 	{
-		prep_fd(input_fd, output_fd);
 		sh_func = get_sh_func(p.com, p.envp);
 		if (!sh_func)
+		{
+			ft_printf("pipex: command not found: %s\n", p.com[0]);
 			exit(1);
-		else
-			execve((const char *)sh_func, (char *const *)p.com, p.envp);
+		}
+		prep_fd(input_fd, output_fd);
+		execve((const char *)sh_func, (char *const *)p.com, p.envp);
 	}
 	else
 		waitpid(-1, &status, WNOHANG);
@@ -100,7 +102,7 @@ int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
 	return (0);
 }
 
-int	execute(t_fd_list p, int argc, char *argv[])
+static int	execute(t_fd_list p, int argc, char *argv[])
 {
 	int	i;
 
