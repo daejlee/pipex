@@ -8,17 +8,18 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Tue Aug 16 20:03:41 2022
+# Make data base, printed on Thu Aug 18 20:45:51 2022
 
+ 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# makefile (from `Makefile', line 6)
+# makefile (from `Makefile', line 17)
 OBJ = pipex_utils_1.o pipex_utils_2.o pipex.o
-# makefile (from `Makefile', line 5)
+# makefile (from `Makefile', line 16)
 SRC = pipex_utils_1.c pipex_utils_2.c pipex.c
 # environment
 VSCODE_LOG_NATIVE = false
@@ -29,24 +30,24 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/daejlee/Desktop/pipex_related/pipex
+CURDIR := /Users/daejlee/Desktop/pipex_related/pipex_git
 # makefile
 SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"26f3b44ea4f1e942cca002e9545643cc.ko","_translationsConfigFile":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/tcf.json","_cacheRoot":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko","_resolvedLanguagePackCoreLocation":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/da15b6fd3ef856477bf6f4fb29ba1b7af717770d","_corruptedFile":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 3)
+# makefile (from `Makefile', line 14)
 CFLAGS = -Wall -Wextra -Werror
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqnc0035xb/T/vscode-ipc-9db519c8-cb91-498a-97d6-59e23d37e85e.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqnc0035xb/T/vscode-ipc-aa60b561-1d40-4ebe-8730-bcab62ca00f1.sock
 # environment
 VSCODE_CWD = /
-# makefile (from `Makefile', line 16)
+# makefile (from `Makefile', line 27)
 OBJ_FILES = $(OBJ)
 # environment
 PATH = /Users/daejlee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
@@ -58,23 +59,23 @@ VSCODE_LOG_STACK = false
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
-# makefile (from `Makefile', line 10)
+# makefile (from `Makefile', line 21)
 LIBFT_DIR = ./libft
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.yQT8anRJSG/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Hiluza20bS/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/daejlee/Desktop/pipex_related/pipex
+PWD = /Users/daejlee/Desktop/pipex_related/pipex_git
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/daejlee
-# makefile (from `Makefile', line 8)
+# makefile (from `Makefile', line 19)
 BONUS_OBJ = pipex_utils_1_bonus.o pipex_utils_2_bonus.o pipex_bonus.o
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
@@ -98,9 +99,9 @@ MAKE = $(MAKE_COMMAND)
 MAKECMDGOALS := all
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 9)
+# makefile (from `Makefile', line 20)
 LIBFT = ./libft/libft.a
-# makefile (from `Makefile', line 4)
+# makefile (from `Makefile', line 15)
 CC = cc
 # default
 MAKE_VERSION := 3.81
@@ -108,7 +109,7 @@ MAKE_VERSION := 3.81
 USER = daejlee
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 2)
+# makefile (from `Makefile', line 13)
 NAME = pipex
 # environment
 LESS = -R
@@ -133,7 +134,7 @@ MFLAGS = -Rrqp
 # environment
 MAIL = daejlee@student.42seoul.kr
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.4816
+XPC_SERVICE_NAME = com.microsoft.VSCode.2360
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -148,11 +149,11 @@ MAKEFILES :=
 PAGER = less
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 7)
+# makefile (from `Makefile', line 18)
 BONUS_SRC = pipex_utils_1_bonus.c pipex_utils_2_bonus.c pipex_bonus.c
 # automatic
 ^F = $(notdir $^)
-# makefile (from `Makefile', line 17)
+# makefile (from `Makefile', line 28)
 SRC_FILES = $(SRC)
 # default
 SUFFIXES := 
@@ -163,9 +164,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 21059
+VSCODE_PID = 57316
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=4/117=3%
+# Load=76/1024=7%, Rehash=0, Collisions=4/119=3%
 
 # Pattern-specific Variable Values
 
@@ -173,15 +174,27 @@ VSCODE_PID = 21059
 
 # Directories
 
-# . (device 16777225, inode 2941338): 14 files, no impossibilities.
+# . (device 16777225, inode 2953193): 10 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 10 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
+
+# Not a target:
+pipex_bonus.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+pipex_utils_2_bonus.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: pipex
 #  Command-line target.
@@ -195,7 +208,7 @@ all: pipex
 # Not a target:
 pipex_utils_1.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 19:57:13
+#  Last modified 2022-08-18 20:43:34
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -210,7 +223,7 @@ pipex_utils_1.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 19:59:46
+#  Last modified 2022-08-18 20:44:46
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -219,7 +232,7 @@ Makefile:
 # Not a target:
 pipex.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 19:57:13
+#  Last modified 2022-08-18 20:43:34
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -228,7 +241,7 @@ pipex.c:
 # Not a target:
 pipex_utils_2.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 19:57:13
+#  Last modified 2022-08-18 20:43:34
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -238,15 +251,23 @@ libft/libft.a:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 29):
+#  commands to execute (from `Makefile', line 40):
 	cd $(LIBFT_DIR); $(MAKE)
+	
+
+bonus: pipex pipex_utils_1_bonus.c pipex_utils_2_bonus.c pipex_bonus.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 53):
+	make WITH_BONUS=1 $(NAME)
 	
 
 fclean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 35):
+#  commands to execute (from `Makefile', line 46):
 	rm -f $(OBJ_FILES) $(BONUS_OBJ) $(NAME)
 	
 
@@ -260,8 +281,9 @@ re:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 38):
+#  commands to execute (from `Makefile', line 49):
 	$(MAKE) fclean
+ 
 	$(MAKE) all
 	
 
@@ -269,7 +291,7 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 32):
+#  commands to execute (from `Makefile', line 43):
 	rm -f $(OBJ_FILES) $(BONUS_OBJ)
 	
 
@@ -279,7 +301,6 @@ pipex_utils_1.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
- 
 # automatic
 # @ := pipex_utils_1.o
 # automatic
@@ -298,15 +319,21 @@ pipex_utils_1.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 # ? := pipex_utils_1.c pipex_utils_2.c pipex.c
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=3/14=21%
-#  commands to execute (from `Makefile', line 26):
+#  commands to execute (from `Makefile', line 37):
 	$(CC) $(CFLAGS) -c $(SRC_FILES)
 	
+
+# Not a target:
+pipex_utils_1_bonus.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 pipex.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 26):
+#  commands to execute (from `Makefile', line 37):
 	$(CC) $(CFLAGS) -c $(SRC_FILES)
 	
 
@@ -317,7 +344,7 @@ pipex: pipex_utils_1.o pipex_utils_2.o pipex.o libft/libft.a
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/6=0%
-#  commands to execute (from `Makefile', line 23):
+#  commands to execute (from `Makefile', line 34):
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) -lft -L$(LIBFT_DIR)
 	
 
@@ -325,12 +352,12 @@ pipex_utils_2.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 26):
+#  commands to execute (from `Makefile', line 37):
 	$(CC) $(CFLAGS) -c $(SRC_FILES)
 	
 
 # files hash-table stats:
-# Load=15/1024=1%, Rehash=0, Collisions=0/43=0%
+# Load=19/1024=2%, Rehash=0, Collisions=0/51=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -342,6 +369,6 @@ pipex_utils_2.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug 16 20:03:41 2022
+# Finished Make data base on Thu Aug 18 20:45:51 2022
 
  
