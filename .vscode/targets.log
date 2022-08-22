@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Mon Aug 22 14:48:47 2022
+# Make data base, printed on Mon Aug 22 21:11:45 2022
 
 # Variables
 
@@ -18,7 +17,6 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 ?F = $(notdir $?)
 # makefile (from `Makefile', line 17)
 OBJ = pipex_utils_1.o pipex_utils_2.o pipex.o
- 
 # makefile (from `Makefile', line 16)
 SRC = pipex_utils_1.c pipex_utils_2.c pipex.c
 # environment
@@ -34,7 +32,7 @@ CURDIR := /Users/daejlee/Desktop/pipex
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"26f3b44ea4f1e942cca002e9545643cc.ko","_translationsConfigFile":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/tcf.json","_cacheRoot":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko","_resolvedLanguagePackCoreLocation":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/da15b6fd3ef856477bf6f4fb29ba1b7af717770d","_corruptedFile":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"26f3b44ea4f1e942cca002e9545643cc.ko","_translationsConfigFile":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/tcf.json","_cacheRoot":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko","_resolvedLanguagePackCoreLocation":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5","_corruptedFile":"/Users/daejlee/Library/Application Support/Code/clp/26f3b44ea4f1e942cca002e9545643cc.ko/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 14)
@@ -44,13 +42,13 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqnc0035xb/T/vscode-ipc-7ec1f37a-e803-4fad-be9a-11e5f2b17b42.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqnc0035xb/T/vscode-ipc-83680ad0-d7f4-4ba5-a5af-16084ef05ec1.sock
 # environment
-VSCODE_CWD = /
+VSCODE_CWD = /Users/daejlee/Desktop/pipex
 # makefile (from `Makefile', line 27)
 OBJ_FILES = $(OBJ)
 # environment
-PATH = /Users/daejlee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
+PATH = /Users/daejlee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/daejlee/.brew/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
@@ -62,7 +60,7 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 21)
 LIBFT_DIR = ./libft_garage
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.B5iVyZIZ5i/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.u5k3kBa2lp/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -80,7 +78,7 @@ BONUS_OBJ = pipex_utils_1_bonus.o pipex_utils_2_bonus.o pipex_bonus.o
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/daejlee/Library/Application Support/Code/CachedData/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+VSCODE_CODE_CACHE_PATH = /Users/daejlee/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 LOGNAME = daejlee
 # environment
@@ -93,12 +91,14 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
 XPC_FLAGS = 0x0
+# environment
+COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
-# default
-MAKECMDGOALS := all
 # environment
-SHLVL = 1
+LC_TERMINAL = iTerm2
+# environment
+SHLVL = 3
 # makefile (from `Makefile', line 20)
 LIBFT = ./libft_garage/libft.a
 # makefile (from `Makefile', line 15)
@@ -109,6 +109,10 @@ MAKE_VERSION := 3.81
 USER = daejlee
 # makefile
 .DEFAULT_GOAL := all
+# default
+MAKECMDGOALS := all
+# environment
+TERM_SESSION_ID = w0t0p0:5463568F-FF6B-481B-94A3-B4F90636242A
 # makefile (from `Makefile', line 13)
 NAME = pipex
 # environment
@@ -117,6 +121,8 @@ LESS = -R
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# environment
+TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -124,7 +130,7 @@ TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cqnc0035xb/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/daejlee/Library/Application Support/Code/1.67.1-main.sock
+VSCODE_IPC_HOOK = /Users/daejlee/Library/Application Support/Code/1.67.2-main.sock
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -132,19 +138,29 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
+TERM_PROGRAM_VERSION = 3.3.7
+# environment
 MAIL = daejlee@student.42seoul.kr
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2364
+XPC_SERVICE_NAME = com.microsoft.VSCode.1164.2EE88846-AD6D-4361-A5AC-C06A6B11D68F
+# environment
+LC_TERMINAL_VERSION = 3.3.7
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
+# environment
+ITERM_SESSION_ID = w0t0p0:5463568F-FF6B-481B-94A3-B4F90636242A
+# environment
+COLORFGBG = 7;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x197AB:0x3:0x33
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
+# environment
+ITERM_PROFILE = Default
 # environment
 PAGER = less
 # environment
@@ -164,9 +180,11 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 6777
+TERM = xterm-256color
+# environment
+VSCODE_PID = 5183
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=4/119=3%
+# Load=86/1024=8%, Rehash=0, Collisions=7/129=5%
 
 # Pattern-specific Variable Values
 
@@ -174,7 +192,7 @@ VSCODE_PID = 6777
 
 # Directories
 
-# . (device 16777225, inode 2958741): 14 files, no impossibilities.
+# . (device 16777225, inode 2982279): 14 files, no impossibilities.
 
 # 14 files, no impossibilities in 1 directories.
 
@@ -216,7 +234,7 @@ bonus: pipex pipex_utils_1_bonus.c pipex_utils_2_bonus.c pipex_bonus.c
 # Not a target:
 pipex_utils_1.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 14:36:12
+#  Last modified 2022-08-22 21:09:11
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -231,7 +249,7 @@ pipex_utils_1.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 14:48:26
+#  Last modified 2022-08-22 21:09:11
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -240,7 +258,7 @@ Makefile:
 # Not a target:
 pipex.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 14:43:11
+#  Last modified 2022-08-22 21:09:11
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -249,12 +267,11 @@ pipex.c:
 # Not a target:
 pipex_utils_2.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 14:38:10
+#  Last modified 2022-08-22 21:09:11
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
- 
 
 libft_garage/libft.a:
 #  Implicit rule search has not been done.
@@ -280,6 +297,7 @@ fclean:
 #  File has not been updated.
 
 re:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -371,6 +389,6 @@ pipex_utils_2.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Aug 22 14:48:47 2022
+# Finished Make data base on Mon Aug 22 21:11:45 2022
 
  

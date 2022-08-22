@@ -15,6 +15,7 @@
 #include "./pipex.h"
 #include <fcntl.h>
 #include <sys/wait.h>
+#include <stdio.h>
 
 static char	**get_sh_path(char **envp)
 {
@@ -39,14 +40,14 @@ static char	**get_sh_path(char **envp)
 	return (NULL);
 }
 
-static char	*get_sh_func(char **com, char **envp)
+static char	*get_sh_func(char **com, char **envp, int *flag)
 {
 	char			*sh_func;
 	char			**sh_paths;
 	unsigned int	i;
 
 	i = 0;
-	if (!access((const char *)com[0], F_OK))
+	if (!access((const char *)com[0], X_OK))
 		return (com[0]);
 	sh_paths = get_sh_path(envp);
 	if (!sh_paths)
@@ -54,7 +55,7 @@ static char	*get_sh_func(char **com, char **envp)
 	while (sh_paths[i])
 	{
 		sh_func = ft_strjoin_modified(sh_paths[i++], com[0]);
-		if (!sh_func || !access(sh_func, F_OK))
+		if (!sh_func || !access(sh_func, X_OK))
 		{
 			free_arr(sh_paths);
 			if (sh_func)
@@ -63,6 +64,8 @@ static char	*get_sh_func(char **com, char **envp)
 		}
 		free(sh_func);
 	}
+	*flag = 1;
+	ft_printf("pipex error: command not found: %s\n", com[0]);
 	free_arr(sh_paths);
 	return (NULL);
 }
@@ -71,6 +74,7 @@ static int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
 {
 	pid_t	pid;
 	int		status;
+	int		com_not_found;
 	char	*sh_func;
 
 	close(closing_fd);
@@ -82,17 +86,17 @@ static int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
 	}
 	else if (!pid)
 	{
-		sh_func = get_sh_func(p.com, p.envp);
-		if (!sh_func)
-		{
-			ft_printf("pipex: command not found: %s\n", p.com[0]);
+		com_not_found = 0;
+		sh_func = get_sh_func(p.com, p.envp, &com_not_found);
+		if (com_not_found)
 			exit(1);
-		}
+		else if (!sh_func)
+			exit(err());
 		prep_fd(input_fd, output_fd);
 		execve((const char *)sh_func, (char *const *)p.com, p.envp);
 	}
 	else
-		waitpid(-1, &status, WNOHANG);
+		waitpid(pid, &status, WNOHANG);
 	return (free_arr(p.com));
 }
 
@@ -134,7 +138,7 @@ int	main(int argc, char *argv[], char **envp)
 	p.envp = envp;
 	p.infile_fd = open(argv[1], O_RDONLY);
 	if (p.infile_fd == -1)
-		return (err());
+		err();
 	p.outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (p.outfile_fd == -1)
 	{
