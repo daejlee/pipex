@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
+#include "./libft_garage/libft/libft.h"
 #include <stdio.h>
 
 int	free_arr(char **com)

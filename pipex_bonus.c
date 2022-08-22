@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
+#include "./libft_garage/libft/libft.h"
+#include "./libft_garage/ft_printf/ft_printf.h"
 #include "./pipex_bonus.h"
 #include <fcntl.h>
 #include <sys/wait.h>

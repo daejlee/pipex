@@ -17,8 +17,8 @@ SRC = pipex_utils_1.c pipex_utils_2.c pipex.c
 OBJ = pipex_utils_1.o pipex_utils_2.o pipex.o
 BONUS_SRC = pipex_utils_1_bonus.c pipex_utils_2_bonus.c pipex_bonus.c
 BONUS_OBJ = pipex_utils_1_bonus.o pipex_utils_2_bonus.o pipex_bonus.o
-LIBFT = ./libft/libft.a
-LIBFT_DIR = ./libft
+LIBFT = ./libft_garage/libft.a
+LIBFT_DIR = ./libft_garage
 
 ifdef WITH_BONUS
 	OBJ_FILES = $(BONUS_OBJ)
@@ -40,9 +40,11 @@ $(LIBFT) :
 	cd $(LIBFT_DIR); $(MAKE)
 
 clean :
+	make -C libft_garage/ clean
 	rm -f $(OBJ_FILES) $(BONUS_OBJ)
 
 fclean :
+	make -C libft_garage/ fclean
 	rm -f $(OBJ_FILES) $(BONUS_OBJ) $(NAME)
 
 re :
