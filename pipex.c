@@ -86,7 +86,7 @@ static int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
 	{
 		com_not_found = 0;
 		sh_func = get_sh_func(p.com, p.envp, &com_not_found);
-		if (com_not_found)
+		if (com_not_found || dup(input_fd) == -1)
 			exit(1);
 		else if (!sh_func)
 			exit(err());
@@ -134,8 +134,6 @@ int	main(int argc, char *argv[], char **envp)
 		return (1);
 	p.envp = envp;
 	p.infile_fd = open(argv[1], O_RDONLY);
-	if (p.infile_fd == -1)
-		err();
 	p.outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (p.outfile_fd == -1)
 	{
@@ -146,5 +144,10 @@ int	main(int argc, char *argv[], char **envp)
 	p.next_pfd = p.pfd_arr[1];
 	if (pipe(p.pfd) == -1)
 		return (err());
+	if (p.infile_fd == -1)
+	{
+		err();
+		p.infile_fd = EOF;
+	}
 	return (execute(p, argc, argv));
 }

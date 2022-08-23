@@ -6,11 +6,13 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Tue Aug 23 17:29:51 2022
+# Make data base, printed on Tue Aug 23 19:33:16 2022
 
 # Variables
 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -42,7 +44,7 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqnc0035xb/T/vscode-ipc-3481b737-8a1a-4430-994c-12734b08b2b6.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqnc0035xb/T/vscode-ipc-76afa20f-df63-4b4b-a97b-c37afa49e249.sock
 # environment
 VSCODE_CWD = /Users/daejlee/Desktop/pipex
 # makefile (from `Makefile', line 27)
@@ -52,7 +54,7 @@ PATH = /Users/daejlee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/us
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-LaunchInstanceID = 9D79284A-F37F-4D7B-B868-363286631E86
+LaunchInstanceID = 98DBA27B-5BA7-4A79-A897-76877AEE1CFE
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -62,7 +64,7 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 21)
 LIBFT_DIR = ./libft_garage
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.gHgz8Ot5iy/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.6UCj9PHyFQ/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -114,7 +116,7 @@ USER = daejlee
 # default
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t0p0:5C651730-AD2B-48D9-B47C-AE24915F45C3
+TERM_SESSION_ID = w0t0p0:62C63905-C975-406D-96FC-5DD064120BDD
 # makefile (from `Makefile', line 13)
 NAME = pipex
 # environment
@@ -144,7 +146,7 @@ TERM_PROGRAM_VERSION = 3.3.7
 # environment
 MAIL = daejlee@student.42seoul.kr
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2140.C665D7CD-A82D-4FB1-915F-8AF75F58AA72
+XPC_SERVICE_NAME = com.microsoft.VSCode.2140.4E5C38EB-2E56-4A30-8BCE-87AF184F75FA
 # environment
 LC_TERMINAL_VERSION = 3.3.7
 # automatic
@@ -152,7 +154,7 @@ LC_TERMINAL_VERSION = 3.3.7
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:5C651730-AD2B-48D9-B47C-AE24915F45C3
+ITERM_SESSION_ID = w0t0p0:62C63905-C975-406D-96FC-5DD064120BDD
 # environment
 COLORFGBG = 7;0
 # environment
@@ -172,7 +174,7 @@ LC_ALL = C
 # makefile (from `Makefile', line 18)
 BONUS_SRC = pipex_utils_1_bonus.c pipex_utils_2_bonus.c pipex_bonus.c
 # environment
-SECURITYSESSIONID = 18703
+SECURITYSESSIONID = 18728
 # automatic
 ^F = $(notdir $^)
 # makefile (from `Makefile', line 28)
@@ -188,7 +190,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 6839
+VSCODE_PID = 20806
 # variable set hash-table stats:
 # Load=89/1024=9%, Rehash=0, Collisions=7/132=5%
 
@@ -198,9 +200,9 @@ VSCODE_PID = 6839
 
 # Directories
 
-# . (device 16777225, inode 2986890): 14 files, no impossibilities.
+# . (device 16777225, inode 2986890): 20 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -255,7 +257,7 @@ pipex_utils_1.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 17:29:11
+#  Last modified 2022-08-23 19:33:14
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -264,13 +266,14 @@ Makefile:
 # Not a target:
 pipex.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 17:29:11
+#  Last modified 2022-08-23 19:33:08
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
+ 
 pipex_utils_2.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-23 17:29:11
@@ -297,7 +300,6 @@ fclean:
 	
 
 # Not a target:
- 
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -324,7 +326,7 @@ clean:
 pipex_utils_1.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: `'
-#  File does not exist.
+#  Last modified 2022-08-23 19:32:49
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -342,7 +344,7 @@ pipex_utils_1.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 # automatic
 # ^ := pipex_utils_1.c pipex_utils_2.c pipex.c
 # automatic
-# ? := pipex_utils_1.c pipex_utils_2.c pipex.c
+# ? := pipex.c
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=3/14=21%
 #  commands to execute (from `Makefile', line 37):
@@ -365,7 +367,7 @@ pipex.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 
 pipex: pipex_utils_1.o pipex_utils_2.o pipex.o libft_garage/libft.a
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Last modified 2022-08-23 19:32:51
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -395,6 +397,6 @@ pipex_utils_2.o: pipex_utils_1.c pipex_utils_2.c pipex.c
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug 23 17:29:51 2022
+# Finished Make data base on Tue Aug 23 19:33:16 2022
 
  
