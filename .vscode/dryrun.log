@@ -4,7 +4,6 @@ cc -Wall -Wextra -Werror -c pipex_utils_1.c pipex_utils_2.c pipex.c
 cc -Wall -Wextra -Werror -c pipex_utils_1.c pipex_utils_2.c pipex.c
 cc -Wall -Wextra -Werror -c pipex_utils_1.c pipex_utils_2.c pipex.c
 cd ./libft_garage; /Applications/Xcode.app/Contents/Developer/usr/bin/make
- 
 make[1]: Entering directory `/Users/daejlee/Desktop/pipex/libft_garage'
 make -C libft/ all
 make -C ft_printf/ all

@@ -55,12 +55,10 @@ static char	*get_sh_func(char **com, char **envp, int *flag)
 	while (sh_paths[i])
 	{
 		sh_func = ft_strjoin_modified(sh_paths[i++], com[0]);
-		if (!sh_func || !access(sh_func, X_OK))
+		if (!access(sh_func, X_OK) || !sh_func)
 		{
 			free_arr(sh_paths);
-			if (sh_func)
-				return (sh_func);
-			return (NULL);
+			return (sh_func);
 		}
 		free(sh_func);
 	}
@@ -95,8 +93,7 @@ static int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
 		prep_fd(input_fd, output_fd);
 		execve((const char *)sh_func, (char *const *)p.com, p.envp);
 	}
-	else
-		waitpid(pid, &status, WNOHANG);
+	waitpid(pid, &status, WNOHANG);
 	return (free_arr(p.com));
 }
 
