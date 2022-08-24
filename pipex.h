@@ -26,10 +26,10 @@ typedef struct fd_list
 }	t_fd_list;
 
 int		free_arr(char **com);
-int		err(void);
+int		err_terminate(t_fd_list *p);
 void	swap_pfd(int **pfd1, int **pfd2);
 void	close_fd(int fd[2]);
-void	prep_fd(int input_fd, int output_fd);
+void	prep_fd(int input_fd, int output_fd, int closing_fd);
 char	*ft_strjoin_modified(char const *s1, char const *s2);
 
 #endif

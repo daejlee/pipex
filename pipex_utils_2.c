@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "./libft_garage/libft/libft.h"
+#include "./pipex.h"
 #include <stdio.h>
 
 int	free_arr(char **com)
@@ -24,9 +25,17 @@ int	free_arr(char **com)
 	return (0);
 }
 
-int	err(void)
+int	err_terminate(t_fd_list *p)
 {
 	perror("pipex error");
+	if (dup(p->infile_fd) != -1)
+		close(p->infile_fd);
+	if (dup(p->outfile_fd) != -1)
+		close(p->outfile_fd);
+	if (p->pfd)
+		close_fd(p->pfd);
+	if (p->next_pfd)
+		close_fd(p->next_pfd);
 	return (1);
 }
 

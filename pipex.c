@@ -16,6 +16,21 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include <stdio.h>
+#include <sys/types.h>
+
+t_fd_list	*init_p(void)
+{
+	t_fd_list	*ret;
+
+	ret = (t_fd_list *)malloc(sizeof(t_fd_list));
+	if (!ret)
+		return (NULL);
+	ret->pfd = NULL;
+	ret->next_pfd = NULL;
+	ret->envp = NULL;
+	ret->com = NULL;
+	return (ret);
+}
 
 static char	**get_sh_path(char **envp)
 {
@@ -68,86 +83,71 @@ static char	*get_sh_func(char **com, char **envp, int *flag)
 	return (NULL);
 }
 
-static int	exec_com(t_fd_list p, int input_fd, int output_fd, int closing_fd)
+int	after_fork(t_fd_list *p, int input_fd, char *argv[], int i)
 {
-	pid_t	pid;
-	int		status;
 	int		com_not_found;
 	char	*sh_func;
 
-	close(closing_fd);
-	pid = fork();
-	if (pid == -1)
+	p->com = ft_split(argv[i], ' ');
+	if (!p->com)
+		return (err_terminate(p));
+	com_not_found = 0;
+	sh_func = get_sh_func(p->com, p->envp, &com_not_found);
+	if (com_not_found || dup(input_fd) == -1)
+		return (0);
+	else if (!sh_func)
 	{
-		free_arr(p.com);
-		return (err());
+		free_arr(p->com);
+		return (err_terminate(p));
 	}
-	else if (!pid)
-	{
-		com_not_found = 0;
-		sh_func = get_sh_func(p.com, p.envp, &com_not_found);
-		if (com_not_found || dup(input_fd) == -1)
-			exit(1);
-		else if (!sh_func)
-			exit(err());
-		prep_fd(input_fd, output_fd);
-		execve((const char *)sh_func, (char *const *)p.com, p.envp);
-	}
-	waitpid(pid, &status, WNOHANG);
-	return (free_arr(p.com));
+	execve((const char *)sh_func, (char *const *)p->com, p->envp);
+	return (0);
 }
 
-static int	execute(t_fd_list p, int argc, char *argv[])
+static int	exec_com(t_fd_list *p, int argc, char *argv[])
 {
-	int	i;
+	pid_t	pid;
+	int		status;
+	int		i;
 
-	i = 2;
-	p.com = ft_split(argv[i++], ' ');
-	if (!p.com)
-		return (err());
-	if (exec_com(p, p.infile_fd, p.pfd[1], 0))
-		return (1);
-	close(p.infile_fd);
-	while (i < argc - 1)
+	i = 1;
+	while (i++ < argc - 2)
 	{
-		if (pipe(p.next_pfd) == -1)
-			return (err());
-		p.com = ft_split(argv[i++], ' ');
-		if (!p.com)
-			return (err());
-		if (i == argc - 1)
-			dup2(p.outfile_fd, p.next_pfd[1]);
-		if (exec_com(p, p.pfd[0], p.next_pfd[1], p.pfd[1]))
-			return (1);
-		close_fd(p.pfd);
-		swap_pfd(&p.pfd, &p.next_pfd);
+		if (pipe(p->next_pfd) == -1)
+			return (err_terminate(p));
+		if (i == 2)
+			prep_fd(p->infile_fd, p->next_pfd[1], p->next_pfd[0]);
+		else if (i == argc - 2)
+			dup2(p->outfile_fd, p->next_pfd[1]);
+		else
+			prep_fd(p->pfd[0], p->next_pfd[1], p->next_pfd[0]);
+		pid = fork();
+		if (pid == -1)
+			return (err_terminate(p));
+		else if (!pid)
+			after_fork(p, p->pfd[0], argv, i);
+		close_fd(p->pfd);
+		swap_pfd(&p->next_pfd, &p->pfd);
 	}
-	close(p.outfile_fd);
+	waitpid(-1, &status, 0);
 	return (0);
 }
 
 int	main(int argc, char *argv[], char **envp)
 {
-	t_fd_list	p;
+	t_fd_list	*p;
 
 	if (argc < 5)
 		return (1);
-	p.envp = envp;
-	p.infile_fd = open(argv[1], O_RDONLY);
-	p.outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (p.outfile_fd == -1)
-	{
-		close(p.infile_fd);
-		return (err());
-	}
-	p.pfd = p.pfd_arr[0];
-	p.next_pfd = p.pfd_arr[1];
-	if (pipe(p.pfd) == -1)
-		return (err());
-	if (p.infile_fd == -1)
-	{
-		err();
-		p.infile_fd = EOF;
-	}
-	return (execute(p, argc, argv));
+	p = init_p();
+	p->envp = envp;
+	p->infile_fd = open(argv[1], O_RDONLY);
+	if (p->infile_fd == -1)
+		perror("pipex error");
+	p->outfile_fd = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (p->outfile_fd == -1)
+		return (err_terminate(p));
+	p->pfd = p->pfd_arr[0];
+	p->next_pfd = p->pfd_arr[1];
+	return (exec_com(p, argc, argv));
 }

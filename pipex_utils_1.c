@@ -27,8 +27,9 @@ void	close_fd(int fd[2])
 	close(fd[1]);
 }
 
-void	prep_fd(int input_fd, int output_fd)
+void	prep_fd(int input_fd, int output_fd, int closing_fd)
 {
+	close(closing_fd);
 	if (input_fd)
 	{
 		dup2(input_fd, 0);
@@ -37,6 +38,6 @@ void	prep_fd(int input_fd, int output_fd)
 	if (output_fd != 1)
 	{
 		dup2(output_fd, 1);
-		close(output_fd);
+		close(input_fd);
 	}
 }

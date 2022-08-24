@@ -51,5 +51,5 @@ re :
 	$(MAKE) fclean
 	$(MAKE) all
 
-bonus : $(NAME) $(BONUS_SRC)
-	make WITH_BONUS=1 $(NAME)
+#bonus : $(NAME) $(BONUS_SRC)
+#	make WITH_BONUS=1 $(NAME)
