@@ -38,6 +38,6 @@ void	prep_fd(int input_fd, int output_fd, int closing_fd)
 	if (output_fd != 1)
 	{
 		dup2(output_fd, 1);
-		close(input_fd);
+		close(output_fd);
 	}
 }
