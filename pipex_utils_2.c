@@ -13,6 +13,21 @@
 #include "./libft_garage/libft/libft.h"
 #include "./pipex.h"
 #include <stdio.h>
+#include <sys/wait.h>
+
+t_fd_list	*init_p(void)
+{
+	t_fd_list	*ret;
+
+	ret = (t_fd_list *)malloc(sizeof(t_fd_list));
+	if (!ret)
+		return (NULL);
+	ret->pfd = NULL;
+	ret->next_pfd = NULL;
+	ret->envp = NULL;
+	ret->com = NULL;
+	return (ret);
+}
 
 int	free_arr(char **com)
 {
@@ -28,14 +43,16 @@ int	free_arr(char **com)
 int	err_terminate(t_fd_list *p)
 {
 	perror("pipex error");
-	if (dup(p->infile_fd) != -1)
+	if (p->infile_fd != -1)
 		close(p->infile_fd);
-	if (dup(p->outfile_fd) != -1)
+	if (p->outfile_fd != -1)
 		close(p->outfile_fd);
 	if (p->pfd)
 		close_fd(p->pfd);
 	if (p->next_pfd)
 		close_fd(p->next_pfd);
+	close(0);
+	close(1);
 	return (1);
 }
 
@@ -66,4 +83,22 @@ char	*ft_strjoin_modified(char const *s1, char const *s2)
 	}
 	res[s1_len + 1 + i] = '\0';
 	return (res);
+}
+
+int	wait_for_children(t_fd_list *p, pid_t *pids)
+{
+	int	i;
+	int	status;
+
+	status = 0;
+	close_fd(p->pfd);
+	close_fd(p->next_pfd);
+	close(0);
+	close(1);
+	free(p);
+	i = 0;
+	while (pids[i])
+		waitpid(pids[i++], &status, 0);
+	free(pids);
+	return (status);
 }

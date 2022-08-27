@@ -23,13 +23,18 @@ typedef struct fd_list
 	int		*next_pfd;
 	char	**envp;
 	char	**com;
+	pid_t	*pids;
 }	t_fd_list;
 
-int		free_arr(char **com);
-int		err(void);
-void	swap_pfd(int **pfd1, int **pfd2);
-void	close_fd(int fd[2]);
-void	prep_fd(int input_fd, int output_fd);
-char	*ft_strjoin_modified(char const *s1, char const *s2);
+void		swap_pfd(int **pfd1, int **pfd2);
+void		close_fd(int fd[2]);
+void		prep_fds(t_fd_list *p, int i, int argc);
+void		prep(int input_fd, int output_fd, int closing_fd, t_fd_list *p);
+void		execve_failed(t_fd_list *p, char *sh_func);
+t_fd_list	*init_p(void);
+int			free_arr(char **com);
+int			err_terminate(t_fd_list *p);
+char		*ft_strjoin_modified(char const *s1, char const *s2);
+int			wait_for_children(t_fd_list *p, pid_t *pids);
 
 #endif
