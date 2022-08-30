@@ -23,12 +23,6 @@ void	swap_pfd(int **pfd1, int **pfd2)
 	*pfd2 = temp;
 }
 
-void	close_fd(int fd[2])
-{
-	close(fd[0]);
-	close(fd[1]);
-}
-
 void	prep_fds(t_fd_list *p, int i, int argc)
 {
 	if (i == 2)
@@ -67,4 +61,27 @@ void	execve_failed(t_fd_list *p, char *sh_func)
 		free(sh_func);
 	free(p);
 	exit (0);
+}
+
+int	check_com_for_quote(char *com)
+{
+	unsigned int	i;
+	unsigned int	k;
+
+	i = 0;
+	while (com[i])
+	{
+		if (!(com[i] - '\''))
+		{
+			k = i + 1;
+			while (com[k])
+			{
+				if (!(com[k] - '\''))
+					return (1);
+				k++;
+			}
+		}
+		i++;
+	}
+	return (0);
 }

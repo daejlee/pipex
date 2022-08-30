@@ -67,6 +67,24 @@ static char	*get_sh_func(char **com, char **envp)
 	return (sh_func);
 }
 
+char	**ft_split_awk(char *s)
+{
+	char			**temp;
+
+	if (ft_strchr(s, '\''))
+		temp = ft_split(s, '\'');
+	else if (ft_strchr(s, '\"'))
+		temp = ft_split(s, '\"');
+	else
+		temp = ft_split(s, ' ');
+	if (!ft_strncmp(temp[0], "awk", 3))
+	{
+		if (temp[0][3] == ' ')
+			temp[0][3] = '\0';
+	}
+	return (temp);
+}
+
 static void	exec_sh(t_fd_list *p, char *argv[], int i)
 {
 	char	*sh_func;
@@ -74,7 +92,10 @@ static void	exec_sh(t_fd_list *p, char *argv[], int i)
 	if (p->infile_fd == -1 && i == 2)
 		execve_failed(p, NULL);
 	close(p->next_pfd[0]);
-	p->com = ft_split(argv[i], ' ');
+	if (ft_strnstr(argv[i], "awk", ft_strlen(argv[i])))
+		p->com = ft_split_awk(argv[i]);
+	else
+		p->com = ft_split(argv[i], ' ');
 	if (!p->com)
 		exit (err_terminate(p));
 	sh_func = get_sh_func(p->com, p->envp);

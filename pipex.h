@@ -27,7 +27,7 @@ typedef struct fd_list
 }	t_fd_list;
 
 void		swap_pfd(int **pfd1, int **pfd2);
-void		close_fd(int fd[2]);
+int			check_com_for_quote(char *com);
 void		prep_fds(t_fd_list *p, int i, int argc);
 void		prep(int input_fd, int output_fd, int closing_fd, t_fd_list *p);
 void		execve_failed(t_fd_list *p, char *sh_func);

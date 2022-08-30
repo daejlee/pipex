@@ -6,7 +6,7 @@
 #    By: daejlee <daejlee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 20:51:25 by daejlee           #+#    #+#              #
-#    Updated: 2022/08/16 20:51:26 by daejlee          ###   ########.fr        #
+#    Updated: 2022/08/30 16:12:58 by daejlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,5 +51,5 @@ re :
 	$(MAKE) fclean
 	$(MAKE) all
 
-#bonus : $(NAME) $(BONUS_SRC)
-#	make WITH_BONUS=1 $(NAME)
+bonus : $(NAME) $(BONUS_SRC)
+	make WITH_BONUS=1 $(NAME)
