@@ -62,26 +62,3 @@ void	execve_failed(t_fd_list *p, char *sh_func)
 	free(p);
 	exit (0);
 }
-
-int	check_com_for_quote(char *com)
-{
-	unsigned int	i;
-	unsigned int	k;
-
-	i = 0;
-	while (com[i])
-	{
-		if (!(com[i] - '\''))
-		{
-			k = i + 1;
-			while (com[k])
-			{
-				if (!(com[k] - '\''))
-					return (1);
-				k++;
-			}
-		}
-		i++;
-	}
-	return (0);
-}

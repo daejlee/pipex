@@ -67,24 +67,6 @@ static char	*get_sh_func(char **com, char **envp)
 	return (sh_func);
 }
 
-char	**ft_split_awk(char *s)
-{
-	char			**temp;
-
-	if (ft_strchr(s, '\''))
-		temp = ft_split(s, '\'');
-	else if (ft_strchr(s, '\"'))
-		temp = ft_split(s, '\"');
-	else
-		temp = ft_split(s, ' ');
-	if (!ft_strncmp(temp[0], "awk", 3))
-	{
-		if (temp[0][3] == ' ')
-			temp[0][3] = '\0';
-	}
-	return (temp);
-}
-
 static void	exec_sh(t_fd_list *p, char *argv[], int i)
 {
 	char	*sh_func;

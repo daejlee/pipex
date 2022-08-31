@@ -35,6 +35,7 @@ t_fd_list	*init_p(void);
 int			free_arr(char **com);
 int			err_terminate(t_fd_list *p);
 char		*ft_strjoin_modified(char const *s1, char const *s2);
+char		**ft_split_awk(char *s);
 int			wait_for_children(t_fd_list *p, pid_t *pids);
 
 #endif
