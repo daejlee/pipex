@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daejlee <daejlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 17:49:17 by daejlee           #+#    #+#             */
-/*   Updated: 2022/08/23 17:49:18 by daejlee          ###   ########.fr       */
+/*   Created: 2022/09/02 16:27:24 by daejlee           #+#    #+#             */
+/*   Updated: 2022/09/02 16:27:25 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,15 @@ int	err_terminate(t_fd_list *p)
 	if (p->outfile_fd != -1)
 		close(p->outfile_fd);
 	if (p->pfd)
-		close_fd(p->pfd);
+	{
+		close(p->pfd[0]);
+		close(p->pfd[1]);
+	}
 	if (p->next_pfd)
-		close_fd(p->next_pfd);
+	{
+		close(p->next_pfd[0]);
+		close(p->next_pfd[1]);
+	}
 	close(0);
 	close(1);
 	return (1);
@@ -91,8 +97,10 @@ int	wait_for_children(t_fd_list *p, pid_t *pids)
 	int	status;
 
 	status = 0;
-	close_fd(p->pfd);
-	close_fd(p->next_pfd);
+	close(p->pfd[0]);
+	close(p->pfd[1]);
+	close(p->next_pfd[0]);
+	close(p->next_pfd[1]);
 	close(0);
 	close(1);
 	free(p);

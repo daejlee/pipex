@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daejlee <daejlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 17:49:09 by daejlee           #+#    #+#             */
-/*   Updated: 2022/08/23 17:49:10 by daejlee          ###   ########.fr       */
+/*   Created: 2022/09/02 16:27:16 by daejlee           #+#    #+#             */
+/*   Updated: 2022/09/02 16:27:18 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "./libft_garage/libft/libft.h"
 #include "./pipex_bonus.h"
 
 void	swap_pfd(int **pfd1, int **pfd2)
@@ -21,12 +22,6 @@ void	swap_pfd(int **pfd1, int **pfd2)
 	temp = *pfd1;
 	*pfd1 = *pfd2;
 	*pfd2 = temp;
-}
-
-void	close_fd(int fd[2])
-{
-	close(fd[0]);
-	close(fd[1]);
 }
 
 void	prep_fds(t_fd_list *p, int i, int argc)
@@ -67,4 +62,18 @@ void	execve_failed(t_fd_list *p, char *sh_func)
 		free(sh_func);
 	free(p);
 	exit (0);
+}
+
+char	**ft_split_awk(char *s)
+{
+	char	**ret;
+
+	if (ft_strchr(s, '\''))
+		ret = ft_split(s, '\'');
+	else
+		ret = ft_split(s, '\"');
+	if (!ret)
+		return (NULL);
+	ret[0][3] = '\0';
+	return (ret);
 }

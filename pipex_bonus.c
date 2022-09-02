@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: daejlee <daejlee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 17:48:30 by daejlee           #+#    #+#             */
-/*   Updated: 2022/08/23 17:48:31 by daejlee          ###   ########.fr       */
+/*   Created: 2022/09/02 16:26:55 by daejlee           #+#    #+#             */
+/*   Updated: 2022/09/02 16:26:58 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft_garage/libft/libft.h"
 #include "./libft_garage/ft_printf/ft_printf.h"
-#include "./pipex.h"
+#include "./pipex_bonus.h"
 #include <fcntl.h>
 #include <sys/wait.h>
 #include <stdio.h>
@@ -71,10 +71,11 @@ static void	exec_sh(t_fd_list *p, char *argv[], int i)
 {
 	char	*sh_func;
 
-	if (p->infile_fd == -1 && i == 2)
-		execve_failed(p, NULL);
 	close(p->next_pfd[0]);
-	p->com = ft_split(argv[i], ' ');
+	if (ft_strnstr(argv[i], "awk", ft_strlen(argv[i])))
+		p->com = ft_split_awk(argv[i]);
+	else
+		p->com = ft_split(argv[i], ' ');
 	if (!p->com)
 		exit (err_terminate(p));
 	sh_func = get_sh_func(p->com, p->envp);

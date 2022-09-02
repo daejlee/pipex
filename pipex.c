@@ -71,8 +71,6 @@ static void	exec_sh(t_fd_list *p, char *argv[], int i)
 {
 	char	*sh_func;
 
-	if (p->infile_fd == -1 && i == 2)
-		execve_failed(p, NULL);
 	close(p->next_pfd[0]);
 	if (ft_strnstr(argv[i], "awk", ft_strlen(argv[i])))
 		p->com = ft_split_awk(argv[i]);

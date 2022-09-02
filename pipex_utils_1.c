@@ -12,6 +12,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "./libft_garage/libft/libft.h"
 #include "./pipex.h"
 
 void	swap_pfd(int **pfd1, int **pfd2)
@@ -61,4 +62,18 @@ void	execve_failed(t_fd_list *p, char *sh_func)
 		free(sh_func);
 	free(p);
 	exit (0);
+}
+
+char	**ft_split_awk(char *s)
+{
+	char	**ret;
+
+	if (ft_strchr(s, '\''))
+		ret = ft_split(s, '\'');
+	else
+		ret = ft_split(s, '\"');
+	if (!ret)
+		return (NULL);
+	ret[0][3] = '\0';
+	return (ret);
 }
