@@ -14,18 +14,19 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
-t_pipex	*init_p(void)
+void	init_p(t_pipex *p)
 {
-	t_pipex	*ret;
-
-	ret = (t_pipex *)malloc(sizeof(t_pipex));
-	if (!ret)
-		return (NULL);
-	ret->pfd = NULL;
-	ret->next_pfd = NULL;
-	ret->envp = NULL;
-	ret->com = NULL;
-	return (ret);
+	p->here_doc_flag = 0;
+	p->outfile_fd = 0;
+	p->infile_fd = 0;
+	// p->pfd[0] = 0;
+	// p->pfd[1] = 0;
+	// (p->pfd + 1)[0] = 0;
+	// (p->pfd + 1)[1] = 0;
+	p->pfd = NULL;
+	p->next_pfd = NULL;
+	p->envp = NULL;
+	p->com = NULL;
 }
 
 int	free_arr(char **com)
@@ -72,7 +73,7 @@ void	execve_failed(t_pipex *p, char *sh_func)
 	exit (0);
 }
 
-int	wait_for_children(t_pipex *p, pid_t *pids)
+int	wait_for_children(t_pipex *p, pid_t *pids, int temp)
 {
 	int	i;
 	int	status;
@@ -84,9 +85,8 @@ int	wait_for_children(t_pipex *p, pid_t *pids)
 	close(p->next_pfd[1]);
 	close(0);
 	close(1);
-	free(p);
 	i = 0;
-	while (pids[i])
+	while (i < temp)
 		waitpid(pids[i++], &status, 0);
 	free(pids);
 	return (status);

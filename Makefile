@@ -31,7 +31,8 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) -lft -L$(LIBFT_DIR)
+	cc -o pipex -g *.c ./libft_garage/libft/*.c ./libft_garage/ft_printf/*.c ./libft_garage/gnl/*.c
+#	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) -lft -L$(LIBFT_DIR)
 
 $(OBJ_FILES) : $(SRC_FILES)
 	$(CC) $(CFLAGS) -c $(SRC_FILES)

@@ -1,5 +1,6 @@
 #include "libft.h"
 #include "pipex.h"
+#include <fcntl.h>
 
 static char	**get_sh_path(char **envp)
 {
@@ -72,15 +73,52 @@ static void	exec_sh(t_pipex *p, char *argv[], int i)
 	execve_failed(p, sh_func);
 }
 
+// ./pipex here_doc LIMITER cmd cmd1 file
+
+int	seg_here_doc(t_pipex *p, char *argv[])
+{
+	char	*limiter;
+	int		here_doc_fd;
+	char	*ret;
+	char	buffer[10];
+
+	limiter = argv[2];
+	here_doc_fd = open("here_doc_input", O_RDWR | O_TRUNC | O_CREAT, 0644);
+	if (here_doc_fd == -1)
+		return (1);
+	ret = "";
+	while (1)
+	{
+		write(1, "heredoc>", 9);
+		read(0, buffer, 10);
+		ret = ft_strjoin(ret, buffer);
+		if (ft_strnstr(ret, limiter, ft_strlen(ret)))
+			break ;
+	}
+	write(here_doc_fd, ret, ft_strlen(ret));
+	p->infile_fd = here_doc_fd;
+	return (0);
+}
+
 int	exec_fork(t_pipex *p, int argc, char *argv[])
 {
-	int		i;
+	int	i;
+	int	temp;
 
-	i = 1;
-	p->pids = (pid_t *)malloc(sizeof(pid_t) * (argc - 2));
+	if (p->here_doc_flag)
+	{
+		temp = argc - 4;
+		if (seg_here_doc(p, argv))
+			return (err_terminate(p));
+	}
+	else
+		temp = argc - 2;
+	p->pids = (pid_t *)malloc(sizeof(pid_t) * (temp));
 	if (!p->pids)
 		return (err_terminate(p));
-	p->pids[argc - 3] = 0;
+	i = 1;
+	if (p->here_doc_flag)
+		i++;
 	while (i++ < argc - 2)
 	{
 		if (pipe(p->next_pfd) == -1)
@@ -98,5 +136,5 @@ int	exec_fork(t_pipex *p, int argc, char *argv[])
 		}
 		swap_pfd(&p->next_pfd, &p->pfd);
 	}
-	return (wait_for_children(p, p->pids));
+	return (wait_for_children(p, p->pids, temp));
 }
