@@ -13,10 +13,10 @@
 NAME = pipex
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
-SRC = pipex_utils_1.c pipex_utils_2.c pipex.c
-OBJ = pipex_utils_1.o pipex_utils_2.o pipex.o
+SRC = pipex_utils_1.c pipex_utils_2.c pipex_exec.c pipex.c
+OBJ = $(SRC:.c=.o)
 BONUS_SRC = pipex_utils_1_bonus.c pipex_utils_2_bonus.c pipex_bonus.c
-BONUS_OBJ = pipex_utils_1_bonus.o pipex_utils_2_bonus.o pipex_bonus.o
+BONUS_OBJ = $(BONUS_SRC:.c=.o)
 LIBFT = ./libft_garage/libft.a
 LIBFT_DIR = ./libft_garage
 

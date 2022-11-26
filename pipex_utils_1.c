@@ -9,11 +9,10 @@
 /*   Updated: 2022/08/13 19:54:28 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <unistd.h>
 #include <stdlib.h>
-#include "./libft_garage/libft/libft.h"
-#include "./pipex.h"
+#include "libft.h"
+#include "pipex.h"
 
 void	swap_pfd(int **pfd1, int **pfd2)
 {
@@ -24,17 +23,7 @@ void	swap_pfd(int **pfd1, int **pfd2)
 	*pfd2 = temp;
 }
 
-void	prep_fds(t_fd_list *p, int i, int argc)
-{
-	if (i == 2)
-		prep(p->infile_fd, p->next_pfd[1], 0, p);
-	else if (i == argc - 2)
-		prep(p->pfd[0], p->outfile_fd, p->pfd[1], NULL);
-	else
-		prep(p->pfd[0], p->next_pfd[1], 1, p);
-}
-
-void	prep(int input_fd, int output_fd, int closing_fd, t_fd_list *p)
+static void	prep(int input_fd, int output_fd, int closing_fd, t_pipex *p)
 {
 	close(closing_fd);
 	if (input_fd)
@@ -53,15 +42,43 @@ void	prep(int input_fd, int output_fd, int closing_fd, t_fd_list *p)
 	}
 }
 
-void	execve_failed(t_fd_list *p, char *sh_func)
+void	prep_fds(t_pipex *p, int i, int argc)
 {
-	err_terminate(p);
-	free(p->pids);
-	free_arr(p->com);
-	if (sh_func)
-		free(sh_func);
-	free(p);
-	exit (0);
+	if (i == 2)
+		prep(p->infile_fd, p->next_pfd[1], 0, p);
+	else if (i == argc - 2)
+		prep(p->pfd[0], p->outfile_fd, p->pfd[1], NULL);
+	else
+		prep(p->pfd[0], p->next_pfd[1], 1, p);
+}
+
+char	*ft_strjoin_modified(char const *s1, char const *s2)
+{
+	int				i;
+	unsigned int	s1_len;
+	char			*res;
+
+	if (!s1 || !s2)
+		return (0);
+	s1_len = ft_strlen(s1);
+	res = (char *)malloc(sizeof(char) * (s1_len + ft_strlen(s2) + 2));
+	if (!res)
+		return (0);
+	i = 0;
+	while (s1[i])
+	{
+		res[i] = s1[i];
+		i++;
+	}
+	res[i] = '/';
+	i = 0;
+	while (s2[i])
+	{
+		res[s1_len + 1 + i] = s2[i];
+		i++;
+	}
+	res[s1_len + 1 + i] = '\0';
+	return (res);
 }
 
 char	**ft_split_awk(char *s)

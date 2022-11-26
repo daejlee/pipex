@@ -9,12 +9,11 @@
 /*   Updated: 2022/08/13 19:54:16 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef PIPEX_H
 # define PIPEX_H
 # include <unistd.h>
 
-typedef struct fd_list
+typedef struct s_pipex
 {
 	int		outfile_fd;
 	int		infile_fd;
@@ -24,18 +23,18 @@ typedef struct fd_list
 	char	**envp;
 	char	**com;
 	pid_t	*pids;
-}	t_fd_list;
+}	t_pipex;
 
 void		swap_pfd(int **pfd1, int **pfd2);
 int			check_com_for_quote(char *com);
-void		prep_fds(t_fd_list *p, int i, int argc);
-void		prep(int input_fd, int output_fd, int closing_fd, t_fd_list *p);
-void		execve_failed(t_fd_list *p, char *sh_func);
-t_fd_list	*init_p(void);
+void		prep_fds(t_pipex *p, int i, int argc);
+void		execve_failed(t_pipex *p, char *sh_func);
+t_pipex		*init_p(void);
 int			free_arr(char **com);
-int			err_terminate(t_fd_list *p);
+int			err_terminate(t_pipex *p);
 char		*ft_strjoin_modified(char const *s1, char const *s2);
 char		**ft_split_awk(char *s);
-int			wait_for_children(t_fd_list *p, pid_t *pids);
+int			wait_for_children(t_pipex *p, pid_t *pids);
+int			exec_fork(t_pipex *p, int argc, char *argv[]);
 
 #endif

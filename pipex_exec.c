@@ -1,21 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: daejlee <daejlee@student.42seoul.kr>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 16:26:55 by daejlee           #+#    #+#             */
-/*   Updated: 2022/09/02 16:26:58 by daejlee          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "./libft_garage/libft/libft.h"
-#include "./libft_garage/ft_printf/ft_printf.h"
-#include "./pipex_bonus.h"
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <stdio.h>
+#include "libft.h"
+#include "pipex.h"
 
 static char	**get_sh_path(char **envp)
 {
@@ -67,7 +51,7 @@ static char	*get_sh_func(char **com, char **envp)
 	return (sh_func);
 }
 
-static void	exec_sh(t_fd_list *p, char *argv[], int i)
+static void	exec_sh(t_pipex *p, char *argv[], int i)
 {
 	char	*sh_func;
 
@@ -88,7 +72,7 @@ static void	exec_sh(t_fd_list *p, char *argv[], int i)
 	execve_failed(p, sh_func);
 }
 
-static int	exec_fork(t_fd_list *p, int argc, char *argv[])
+int	exec_fork(t_pipex *p, int argc, char *argv[])
 {
 	int		i;
 
@@ -115,23 +99,4 @@ static int	exec_fork(t_fd_list *p, int argc, char *argv[])
 		swap_pfd(&p->next_pfd, &p->pfd);
 	}
 	return (wait_for_children(p, p->pids));
-}
-
-int	main(int argc, char *argv[], char **envp)
-{
-	t_fd_list	*p;
-
-	if (argc < 5)
-		return (1);
-	p = init_p();
-	p->envp = envp;
-	p->infile_fd = open(argv[1], O_RDONLY);
-	if (p->infile_fd == -1)
-		perror("pipex error");
-	p->outfile_fd = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
-	if (p->outfile_fd == -1)
-		return (err_terminate(p));
-	p->pfd = p->pfd_arr[0];
-	p->next_pfd = p->pfd_arr[1];
-	return (exec_fork(p, argc, argv));
 }
