@@ -59,6 +59,8 @@ int	err_terminate(t_pipex *p)
 	}
 	close(0);
 	close(1);
+	if (p->here_doc_flag)
+		unlink(HERE_DOC_INPUT_BUFFER);
 	return (1);
 }
 

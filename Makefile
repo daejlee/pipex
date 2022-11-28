@@ -13,7 +13,7 @@
 NAME = pipex
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
-SRC = pipex_utils_1.c pipex_utils_2.c pipex_exec.c pipex.c
+SRC = pipex_utils_1.c pipex_utils_2.c pipex_exec.c pipex_hd.c pipex.c
 OBJ = $(SRC:.c=.o)
 BONUS_SRC = pipex_utils_1_bonus.c pipex_utils_2_bonus.c pipex_bonus.c
 BONUS_OBJ = $(BONUS_SRC:.c=.o)

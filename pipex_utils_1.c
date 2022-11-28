@@ -44,12 +44,24 @@ static void	prep(int input_fd, int output_fd, int closing_fd, t_pipex *p)
 
 void	prep_fds(t_pipex *p, int i, int argc)
 {
-	if (i == 2)
-		prep(p->infile_fd, p->next_pfd[1], 0, p);
-	else if (i == argc - 2)
-		prep(p->pfd[0], p->outfile_fd, p->pfd[1], NULL);
+	if (p->here_doc_flag)
+	{
+		if (i == 3)
+			prep(p->infile_fd, p->next_pfd[1], 0, p);
+		else if (i == argc - 2)
+			prep(p->pfd[0], p->outfile_fd, p->pfd[1], NULL);
+		else
+			prep(p->pfd[0], p->next_pfd[1], 1, p);
+	}
 	else
-		prep(p->pfd[0], p->next_pfd[1], 1, p);
+	{
+		if (i == 2)
+			prep(p->infile_fd, p->next_pfd[1], 0, p);
+		else if (i == argc - 2)
+			prep(p->pfd[0], p->outfile_fd, p->pfd[1], NULL);
+		else
+			prep(p->pfd[0], p->next_pfd[1], 1, p);
+	}
 }
 
 char	*ft_strjoin_modified(char const *s1, char const *s2)

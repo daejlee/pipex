@@ -9,6 +9,10 @@
 /*   Updated: 2022/08/13 19:54:16 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef HERE_DOC_INPUT_BUFFER
+# define HERE_DOC_INPUT_BUFFER "here_doc_input_buffer"
+#endif
+
 #ifndef PIPEX_H
 # define PIPEX_H
 # include <unistd.h>
@@ -37,5 +41,7 @@ char		*ft_strjoin_modified(char const *s1, char const *s2);
 char		**ft_split_awk(char *s);
 int			wait_for_children(t_pipex *p, pid_t *pids, int temp);
 int			exec_fork(t_pipex *p, int argc, char *argv[]);
+int			here_doc(t_pipex *p, int argc, char *argv[]);
+void		exec_sh(t_pipex *p, char *argv[], int i);
 
 #endif

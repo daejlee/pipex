@@ -28,7 +28,10 @@ int	main(int argc, char *argv[], char **envp)
 		p.here_doc_flag = 1;
 	if (p.infile_fd == -1)
 		perror("pipex error");
-	p.outfile_fd = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if ((ft_strncmp(argv[1], "here_doc", 9)))
+		p.outfile_fd = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	else
+		p.outfile_fd = open(argv[argc - 1], O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (p.outfile_fd == -1)
 		return (err_terminate(&p));
 	p.pfd = p.pfd_arr[0];
